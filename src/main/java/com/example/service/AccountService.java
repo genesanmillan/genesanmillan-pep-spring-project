@@ -16,17 +16,17 @@ public class AccountService {
     }
 
     /**
-     * Registers an Account and persisting it
+     * Registers an Account and persists it
      * @param account Account to register
-     * @return Persister Account
+     * @return Persisted Account
      */
     public Account register(Account account) {
         return repository.save(account);
     }
 
     /**
-     * Checks the database if the given Account's username is available to use 
-     * @param account Object to check
+     * Checks the database if the given Account username is available to use 
+     * @param username String to check
      * @return true or false whether the account is available
      */
     public boolean usernameAvailable(String username) {
@@ -39,11 +39,20 @@ public class AccountService {
     }
 
     /**
+     * Checks the database if the given Account ID is available to use 
+     * @param account_id Integer to check
+     * @return true or false whether the account is available
+     */
+    public boolean usernameAvailable(int account_id) {
+        return repository.findById(account_id).isEmpty();
+    }
+
+    /**
      * Checks the basic constraints for the Account given if it passes or not
      * @param account Account to be checked
      * @return true or false whether the account passes the constraints or not
      */
-    public boolean checkConstraints(Account account) {
+    public boolean constraintsPassed(Account account) {
         if(account.getUsername().isBlank() || account.getPassword().length() < 4) {
             return false;
         }

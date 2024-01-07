@@ -10,37 +10,36 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 @RestControllerAdvice
 public class ExceptionsHandler {
-
     /**
-     * For handling Registration exception
-     * @param ex Register Exception
+     * For handling Bad Request exception
+     * @param ex BadRequest Exception
      * @return 400 HTTP Status
      */
-    @ExceptionHandler(RegisterException.class)
+    @ExceptionHandler(BadRequestException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
-    public ResponseEntity<String> registerFailed(RegisterException ex) {
+    public ResponseEntity<?> registerFailed(BadRequestException ex) {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ex.getMessage());
     }
 
     /**
-     * For handling Username exception
-     * @param ex Username Exception
+     * For handling Conflict exception
+     * @param ex ConflictException
      * @return 409 HTTP Status
      */
-    @ExceptionHandler(UsernameException.class)
+    @ExceptionHandler(ConflictException.class)
     @ResponseStatus(HttpStatus.CONFLICT)
-    public ResponseEntity<String> usernameNotAvailable(UsernameException ex) {
+    public ResponseEntity<?> usernameNotAvailable(ConflictException ex) {
         return ResponseEntity.status(HttpStatus.CONFLICT).body(ex.getMessage());
     }
 
     /**
-     * For handling InvalidLogin exception
-     * @param ex InvalidLogin Exception
+     * For handling Unauthorized exception
+     * @param ex UnauthorizedException
      * @return 401 HTTP Status
      */
-    @ExceptionHandler(InvalidLoginException.class)
+    @ExceptionHandler(UnauthorizedException.class)
     @ResponseStatus(HttpStatus.UNAUTHORIZED)
-    public ResponseEntity<String> loginException(InvalidLoginException ex) {
+    public ResponseEntity<?> loginException(UnauthorizedException ex) {
         return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(ex.getMessage());
     }
 }
